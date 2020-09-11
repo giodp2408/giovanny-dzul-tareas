@@ -1,6 +1,6 @@
 # Giovanny-Dzul-Tareas
 
-## 1- Titulos de las lecciones de Vimtutor 1.7
+## 1- Titulo de las lecciones de Vimtutor v1.7
 
 * Lesson 1
 	* Lesson 1.1: MOVING THE CURSOR
