@@ -1,5 +1,7 @@
 # Giovanny-Dzul-Tareas
 
+## 1- Titulos de las lecciones de Vimtutor 1.7
+
 * Lesson 1
 	* Lesson 1.1: MOVING THE CURSOR
 	* Lesson 1.2: EXITING VIM
@@ -40,4 +42,9 @@
 	* Lesson 6.2: THE APPEND COMMAND
 	* Lesson 6.3: ANOTHER WAY TO REPLACE
 	* Lesson 6.4: COPY AND PASTE TEXT 
-	* Lesson 6.5: SET OPTION 
+	* Lesson 6.5: SET OPTION
+
+* Lesson 7
+	* Lesson 7.1: GETTING HELP
+	* Lesson 7.2: CREATE A STARTUP SCRIPT
+	* Lesson 7.3: COMPLETION
