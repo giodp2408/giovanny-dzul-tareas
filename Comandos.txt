@@ -226,7 +226,7 @@ docker run utmdb:v1
 
 docker ps
 Buscar la dirección IP del contenedor --> docker inspect <ID> | jq '.[].NetworkSettings.IPAddress'
-mysql -uroot -pmypassword -h <Dirección IP> -P 3306
+mysql -uroot -prootpwd -h <Dirección IP> -P 3306
 
 ##### Actividad 04 WordPress
 
