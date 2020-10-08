@@ -1,0 +1,491 @@
+----------------------------------> Comandos utiles de Linux Ubuntu
+
+#Ver carpetas y archivos del directorio actual
+ls
+
+#Cambiar de directorio / Regresar a un directorio anterior / Regresar a la raiz
+cd <Nombre del directorio> / cd .. / cd
+
+#Crear un directorio
+mkdir <Nombre del archivo>
+
+#Aumentar permisos del directorio y sus archivos dentro
+chmod -R 777 <Nombre del directorio>
+
+#Descargar archivos
+wget <link del archivo> -O <nombre del archivo extension>
+
+#Eliminar programa y sus derivados
+sudo apt-get --purge remove <Nombre>
+
+----------------------------------> Comandos GIT
+
+#Agregar credenciales
+git config --global user.email "fraxinus2408@gmail.com"
+git config --global user.name "giodp2408"
+
+#Clonar repositorio
+git clone https://github.com/giodp2408/giovanny-dzul-tareas.git
+
+#Agregar archivos
+git add <file>
+
+#Crear commit con un nombre
+git commit -m "<Nombre del archivo>"
+
+#Subir commit al repositorio de GitHub
+git push origin master
+
+----------------------------------> Comandos Docker
+
+#Ver contenedores, imagenes, etiquetas, ID, etc.
+docker ps
+
+#Ver mas detalles del contenedor
+docker inspect <ID>
+
+#Ver imagenes
+docker images
+
+#Ver estado en tiempo real de los contenedores
+docker stats
+
+#Detener un contenedor
+docker stop <nombre del contenedor>
+
+#Eliminar un contenedor
+docker rm <nombre del contenedor>
+
+#Detener todos los contenedores
+docker stop $(docker ps -a -q)
+
+#Eliminar todos los contenedores
+docker rm -f $(docker ps -a -q)
+
+#Eliminar red
+docker network rm <Nombre de la red>
+
+#Elevar permisos para Docker
+sudo groupadd docker
+sudo usermod -aG docker $USER
+REINICIAR SISTEMA
+
+---------------------------------> Comandos Clase 17-Sep-2020
+
+##### Actividad 01 - IPFS
+
+mkdir clase-17-sep-2020
+cd clase-17-sep-2020
+mkdir 01
+cd 01
+vi index.js
+
+const prompt = require('prompt');
+const IPFS = require("ipfs-mini");
+const ipfs = new IPFS({host: 'ipfs.infura.io', port:5001, protocol:'https'});
+prompt.start();
+prompt.get(['ipfs'], function (err, result) {
+console.log('Command-line input received:');
+console.log('  IPS: ' + result.ipfs);
+ipfs.add(result.ipfs, (err,hash)=> {
+   if(err){
+   return console.log(err);
+   }
+   console.log('https://ipfs.infura.io/ipfs/'+hash)
+})
+});
+
+touch package.json Dockerfile
+vi package.json
+
+{
+ "name": "ipfs",
+ "version": "1.0.0",
+ "description": "a ipfs connection for an easy example",
+ "main": "index.js",
+ "scripts": {
+   "test": "echo \"Error: no test specified\" && exit 1",
+   "start": "node index.js"
+ },
+ "keywords": [
+   "ipfs",
+   "file",
+   "system",
+   "docker"
+ ],
+ "author": "Data to bsn",
+ "license": "MIT",
+ "dependencies": {
+   "ipfs-mini": "^1.1.5",
+   "prompt": "^1.0.0"
+ }
+}
+
+vi Dockerfile
+
+FROM node:10.15.0
+WORKDIR /usr/src/app
+COPY package*.json ./
+RUN npm install
+COPY . .
+CMD [ "npm", "start" ]
+
+docker build -t ipfs:v1 .
+docker run --rm -it --name=ipfs ipfs:v1
+-> "Escribe cualquier texto"
+
+##### Actividad 02 - Static WebSite
+
+vi Dockerfile
+
+FROM nginx:alpine
+COPY . /usr/share/nginx/html
+
+vi index.html
+
+<p>hola mundo</p>
+
+docker build -t staticweb:v1 . 
+docker run -it -p 8080:80 --name=static staticweb:v1
+
+http://localhost:8080/
+
+##### Actividad 03 Base de datos MYSQL
+
+::::::::::.TERMINAL 1:::::::::::::::::::
+
+docker run --name=test-mysql mysql
+docker run --detach --name=test-mysql --env="MYSQL_ROOT_PASSWORD=mypassword" mysql
+Si marca error el comando anterior --> docker rm -f $(docker ps -a -q)
+docker ps
+Buscar la dirección IP del contenedor --> docker inspect <ID> | jq '.[].NetworkSettings.IPAddress'
+Si no has instalado el cliente de MySQL en Ubuntu --> sudo apt-get install mysql-client
+mysql -uroot -pmypassword -h <Dirección IP> -P 3306
+
+::::::::::.TERMINAL 2:::::::::::::::::::
+
+vim Dockerfile
+
+FROM mysql:latest
+
+ENV MYSQL_ROOT_PASSWORD=rootpwd
+ENV MYSQL_DATABASE=db_name
+ENV MYSQL_USER=db_username
+ENV MYSQL_PASSWORD=db_pw
+
+COPY *.sh /docker-entrypoint-initdb.d/
+COPY *.sql /docker-entrypoint-initdb.d/
+
+vim test.sh
+
+#!/bin/bash
+
+echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+echo "                          UTM DB                                "
+echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+
+vim test.sql
+
+--
+-- Table structure for table `user_details`
+--
+
+CREATE TABLE IF NOT EXISTS `user_details` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) DEFAULT NULL,
+  `first_name` varchar(50) DEFAULT NULL,
+  `last_name` varchar(50) DEFAULT NULL,
+  `gender` varchar(10) DEFAULT NULL,
+  `password` varchar(50) DEFAULT NULL,
+  `status` tinyint(10) DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10001 ;
+
+--
+-- Dumping data for table `user_details`
+--
+
+INSERT INTO `user_details` (`user_id`, `username`, `first_name`, `last_name`, `gender`, `password`, `status`) VALUES
+(1, 'rogers63', 'david', 'john', 'Female', 'e6a33eee180b07e563d74fee8c2c66b8', 1),
+(2, 'mike28', 'rogers', 'paul', 'Male', '2e7dc6b8a1598f4f75c3eaa47958ee2f', 1),
+(3, 'rivera92', 'david', 'john', 'Male', '1c3a8e03f448d211904161a6f5849b68', 1),
+(4, 'ross95', 'maria', 'sanders', 'Male', '62f0a68a4179c5cdd997189760cbcf18', 1),
+(5, 'paul85', 'morris', 'miller', 'Female', '61bd060b07bddfecccea56a82b850ecf', 1),
+(6, 'smith34', 'daniel', 'michael', 'Female', '7055b3d9f5cb2829c26cd7e0e601cde5', 1),
+(7, 'james84', 'sanders', 'paul', 'Female', 'b7f72d6eb92b45458020748c8d1a3573', 1),
+(8, 'daniel53', 'mark', 'mike', 'Male', '299cbf7171ad1b2967408ed200b4e26c', 1),
+(9, 'brooks80', 'morgan', 'maria', 'Female', 'aa736a35dc15934d67c0a999dccff8f6', 1),
+(10, 'morgan65', 'paul', 'miller', 'Female', 'a28dca31f5aa5792e1cefd1dfd098569', 1);
+
+docker build -t utmdb:v1 .
+docker run utmdb:v1
+
+::::::::::.TERMINAL 3:::::::::::::::::::
+
+docker ps
+Buscar la dirección IP del contenedor --> docker inspect <ID> | jq '.[].NetworkSettings.IPAddress'
+mysql -uroot -pmypassword -h <Dirección IP> -P 3306
+
+##### Actividad 04 WordPress
+
+touch docker-compose.yml
+mkdir -p nginx/
+mkdir -p db-data/
+mkdir -p logs/nginx/
+mkdir -p wordpress/
+
+vim nginx/wordpress.conf	
+
+server {
+    listen 80;
+    server_name wp-hakase.co;
+ 
+    root /var/www/html;
+    index index.php;
+ 
+    access_log /var/log/nginx/hakase-access.log;
+    error_log /var/log/nginx/hakase-error.log;
+ 
+    location / {
+        try_files $uri $uri/ /index.php?$args;
+    }
+ 
+    location ~ \.php$ {
+        try_files $uri =404;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass wordpress:9000;
+        fastcgi_index index.php;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+    }
+}
+
+vim docker-compose.yml
+
+nginx:
+    image: nginx:latest
+    ports:
+        - '8080:80'
+    volumes:
+        - ./nginx:/etc/nginx/conf.d
+        - ./logs/nginx:/var/log/nginx
+        - ./wordpress:/var/www/html
+    links:
+        - wordpress
+    restart: always
+mysql:
+    image: mariadb
+    ports:
+        - '3307:3306'
+    volumes:
+        - ./db-data:/var/lib/mysql
+    environment:
+        - MYSQL_ROOT_PASSWORD=aqwe123
+    restart: always
+wordpress:
+    image: wordpress:4.7.1-php7.0-fpm
+    ports:
+        - '9000:9000'
+    volumes:
+        - ./wordpress:/var/www/html
+    environment:
+        - WORDPRESS_DB_NAME=wpdb
+        - WORDPRESS_TABLE_PREFIX=wp_
+        - WORDPRESS_DB_HOST=mysql
+        - WORDPRESS_DB_PASSWORD=aqwe123
+    links:
+        - mysql
+    restart: always
+
+
+---> Instalar Docker-Compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.27.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose --version
+
+docker-compose up 
+http://localhost:8080/
+
+docker-compose down 
+sudo rm -rf db-data
+
+
+---------------------------------> Comandos Clase 24-Sep-2020
+
+### Crear una red 
+docker network create -d bridge elk
+
+### Ver las redes 
+docker network ls 
+
+### Inspeccionar su configuración
+docker inspect elk
+
+### Levantar Logstash
+docker run -it --net=elk --name logstash --rm docker.elastic.co/logstash/logstash:7.6.2 -e 'input { stdin { } } output { stdout { codec => rubydebug } }'
+
+mkdir pipeline
+vi pipeline/logstash.conf
+
+input {
+  file {
+    path => "/app/input.log"
+  }
+}
+
+output {
+  file {
+    path => "/app/output.log"
+  }
+}
+
+::::::::::.TERMINAL 1:::::::::::::::::::
+
+docker run -it --rm --name logstash -v "$PWD/pipeline":/app --entrypoint bash docker.elastic.co/logstash/logstash:7.6.2 
+Pegar en el bash --> logstash -f /app/logstash.conf
+
+:::::::::::::::TERMINAL 2:::::::::::::::::
+
+docker exec -it logstash bash
+touch /app/output.log; tail -f /app/output.log
+echo "hola mundo desde logstash" >> /app/input.log
+
+---------------------------------> Comandos Clase 29-Sep-2020
+
+::::::::::.TERMINAL 1:::::::::::::::::::
+
+## Inicio
+
+mkdir ELK-example
+cd ELK-example
+
+### 1.- Crear la red
+
+docker network create -d bridge mynetwork   
+
+## 2.- Levantar el servicio de ElasticSearch
+
+docker run \
+-p 9200:9200 -p 9300:9300 \
+--net=mynetwork \
+--name elasticsearch \
+-e "discovery.type=single-node" \
+docker.elastic.co/elasticsearch/elasticsearch:7.6.2
+
+::::::::::.TERMINAL 2:::::::::::::::::::
+
+### 3.- Levantar el servicio de Logstash
+
+### 3.1 Hacer el archivo de configuración logstash.conf
+
+mkdir pipeline
+touch pipeline/logstash.conf
+vim pipeline/logstash.conf
+
+input {
+ stdin {}
+}
+
+output {
+  elasticsearch {
+    hosts => ["elasticsearch:9200"]
+  }
+}
+
+### 3.2 Levantar el servicio de Logstrash para terminal
+
+docker run -it \
+--rm \
+--net=mynetwork \
+--name logstash \
+-v "$PWD/pipeline":/app \
+--entrypoint bash \
+docker.elastic.co/logstash/logstash:7.6.2 
+
+### 3.3 Cargar el archivo de configuración
+
+bash --> logstash -f /app/logstash.conf
+
+### 3.4.-  Revisar nuestros datos en
+
+http://localhost:9200/_search?pretty&size=1000
+
+::::::::::.TERMINAL 3:::::::::::::::::::
+
+### 4.- Levantar el servicio de Kibana 
+
+docker run --rm \
+--name kibana \
+--net=mynetwork \
+-p 5601:5601 \
+kibana:7.6.2
+
+### 5.- Revisar nuestros servicios de ELK en la red mynetwork
+
+docker inspect mynetwork
+
+### 6.- Revisión transmision de datos
+
+curl http://localhost:9200/_cat/indices\?v
+
+::::::::::.TERMINAL 4:::::::::::::::::::
+
+### 7.- Cargar a un servicio de Logstrash informacíon de un CSV
+
+#### 7.1 Obtener el .csv y guardarlo en el directorio csv
+
+mkdir csv
+Descargar csv y guardarlo en el directorio creado -> https://www.kaggle.com/ptoscano230382/air-bnb-ny-2019
+
+#### 7.2 hacer el archivo de configuracion para Logstash
+
+vim csv/logstash.conf
+
+input {
+ 	file{
+		path => "/app/*.csv"
+		start_position => "beginning"
+		sincedb_path => "NULL"
+	}
+}
+
+filter{
+	csv{
+		separator => ","
+		columns => ["id","name","host_id","host_name","neighbourhood_group","neighbourhood","latitude","longitude","room_type","price","minimum_nights","number_of_reviews","last_review","reviews_per_month","calculated_host_listings_count","availability_365"]
+	}
+}
+
+output {
+    elasticsearch {
+			    hosts => ["elasticsearch:9200"]
+			    index => "ab_nyc_2019"
+			  }
+    stdout{}
+}
+
+
+#### 7.3 Levantar el servicio de Logstash
+
+docker run -it \
+--rm \
+--net=mynetwork \
+--name logstash_CSV \
+-v "$PWD/csv":/app \
+--entrypoint bash \
+docker.elastic.co/logstash/logstash:7.6.2 
+
+#### 7.2 Correr el archivo de configuración
+
+logstash -f /app/logstash.conf
+
+#### 7.2 Ver nuestra información en kibana
+
+http://localhost:5601/
+
+
+
+
