@@ -315,6 +315,8 @@ sudo rm -rf db-data
 
 ---------------------------------> Comandos Clase 24-Sep-2020
 
+::::::::::.TERMINAL 1:::::::::::::::::::
+
 ### Crear una red 
 docker network create -d bridge elk
 
@@ -326,6 +328,10 @@ docker inspect elk
 
 ### Levantar Logstash
 docker run -it --net=elk --name logstash --rm docker.elastic.co/logstash/logstash:7.6.2 -e 'input { stdin { } } output { stdout { codec => rubydebug } }'
+
+CTRL + C para cerrar este logstash e iniciar la siguiente actividad
+
+:::::::::::::::::::::::::::::::::::::::::
 
 mkdir pipeline
 vi pipeline/logstash.conf
@@ -342,15 +348,17 @@ output {
   }
 }
 
-::::::::::.TERMINAL 1:::::::::::::::::::
-
 docker run -it --rm --name logstash -v "$PWD/pipeline":/app --entrypoint bash docker.elastic.co/logstash/logstash:7.6.2 
 Pegar en el bash --> logstash -f /app/logstash.conf
 
-:::::::::::::::TERMINAL 2:::::::::::::::::
+::::::::::.TERMINAL 2:::::::::::::::::::
 
 docker exec -it logstash bash
 touch /app/output.log; tail -f /app/output.log
+
+::::::::::.TERMINAL 3:::::::::::::::::::
+
+docker exec -it logstash bash
 echo "hola mundo desde logstash" >> /app/input.log
 
 ---------------------------------> Comandos Clase 29-Sep-2020
