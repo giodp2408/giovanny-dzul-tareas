@@ -315,7 +315,7 @@ sudo rm -rf db-data
 
 ---------------------------------> Comandos Clase 24-Sep-2020
 
-::::::::::.TERMINAL 1:::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::
 
 ### Crear una red 
 docker network create -d bridge elk
@@ -331,7 +331,7 @@ docker run -it --net=elk --name logstash --rm docker.elastic.co/logstash/logstas
 
 CTRL + C para cerrar este logstash e iniciar la siguiente actividad
 
-:::::::::::::::::::::::::::::::::::::::::
+::::::::::.TERMINAL 1:::::::::::::::::::
 
 mkdir pipeline
 vi pipeline/logstash.conf
