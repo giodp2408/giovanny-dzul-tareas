@@ -486,11 +486,11 @@ docker run -it \
 --entrypoint bash \
 docker.elastic.co/logstash/logstash:7.6.2 
 
-#### 7.2 Correr el archivo de configuración
+#### 7.4 Correr el archivo de configuración
 
 logstash -f /app/logstash.conf
 
-#### 7.2 Ver nuestra información en kibana
+#### 7.5 Ver nuestra información en kibana
 
 http://localhost:5601/
 
