@@ -2,7 +2,7 @@ Historia de Hadoop:
 
 Todo comienza en 1997 cuando Doug Cutting escribió la primera versión de Lucene, una biblioteca de búsqueda de texto en el que el analiza información con el 
 objetivo de crear un índice que permite encontrar todas sus ubicaciones de manera rápida. Le tomó alrededor de 3 meses para obtener un código utilizable pero fue 
-lanzado en el 2000 donde fue bien aceptado. Luego de eso se unió Mike Cafarella, en el nuevo proyecto Apache Nutch, un rastreador Web, por lo que en el 2001, Lucene 
+lanzado en el 2000 donde fue bien aceptado. Luego de eso, se unió Mike Cafarella en el nuevo proyecto Apache Nutch, un rastreador Web, por lo que en el 2001, Lucene 
 se muda a Apache Software Foundation y se complementa con este nuevo proyecto.
 
 En el año 2003, Google publicó el primer documento de sistemas de archivos de Google. Esto fue muy importante para Doug Cutting y Mike Cafarella porque resolvió 
