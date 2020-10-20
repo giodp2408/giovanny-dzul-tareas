@@ -10,4 +10,4 @@ En febrero del 2006, Doug lanzó el GDFS y MapReduce de la base código de Nutch
 
 En 2012, el clúster de Hadoop de Yahoo! cuenta con 42 000 nodos, su número de contribuyentes de Hadoop alcanza los 1200, pero antes de que Hadoop se generalizara, incluso el almacenamiento de grandes cantidades de datos estructurados era problemático. La carga financiera de los grandes silos de datos hizo que las organizaciones descartaran información no esencial, manteniendo solo los datos más valiosos. Hadoop revolucionó el almacenamiento de datos e hizo posible mantener todos los datos, sin importar lo importante que sea.
 
-Por último, como dato interesante, el nombre de Hadoop y su logo provienen de un peluche de elefante.
+Por último, como dato interesante, el nombre de Hadoop y su logo hacen referencia de un peluche de elefante del hijo de Doug Cutting.
