@@ -1,13 +1,29 @@
 Historia de Hadoop:
 
-Todo comienza en 1997 cuando Doug Cutting escribió la primera versión de Lucene, una biblioteca de búsqueda de texto en el que el analiza información con el objetivo de crear un índice que permite encontrar todas sus ubicaciones de manera rápida. Le tomó alrededor de 3 meses para obtener un código utilizable pero fue lanzado en el 2000 donde fue bien aceptado. Luego de eso se unió Mike Cafarella, en el nuevo proyecto Apache Nutch, un rastreador Web, por lo que en el 2001, Lucene se muda a Apache Software Foundation y se complementa con este nuevo proyecto.
+Todo comienza en 1997 cuando Doug Cutting escribió la primera versión de Lucene, una biblioteca de búsqueda de texto en el que el analiza información con el 
+objetivo de crear un índice que permite encontrar todas sus ubicaciones de manera rápida. Le tomó alrededor de 3 meses para obtener un código utilizable pero fue 
+lanzado en el 2000 donde fue bien aceptado. Luego de eso se unió Mike Cafarella, en el nuevo proyecto Apache Nutch, un rastreador Web, por lo que en el 2001, Lucene 
+se muda a Apache Software Foundation y se complementa con este nuevo proyecto.
 
-En el año 2003, Google publicó el primer documento de sistemas de archivos de Google. Esto fue muy importante para Doug Cutting y Mike Cafarella porque resolvió algunas cuestiones importantes, así que lo implementaron en Java y desarrollaron el sistema "Nutch Distributed File System (NDFS)", que abstrae el almacenamiento del cluster presentando en un solo sistema de archivos y confiable. La implementación tenia notables ventajas como escrituras simultaneas en el mismo archivo con buen rendimiento y manejar fallas sin intervención del operador.
+En el año 2003, Google publicó el primer documento de sistemas de archivos de Google. Esto fue muy importante para Doug Cutting y Mike Cafarella porque resolvió 
+algunas cuestiones importantes, así que lo implementaron en Java y desarrollaron el sistema "Nutch Distributed File System (NDFS)", que abstrae el almacenamiento 
+del cluster presentando en un solo sistema de archivos y confiable. La implementación tenia notables ventajas como escrituras simultaneas en el mismo archivo con 
+buen rendimiento y manejar fallas sin intervención del operador.
 
-Había una cuestión para Doug y Mike en el procesamiento de datos, porque tenia que ejecutarse en paralelo para ajustare a la naturaleza distribuida de NDFS con similares capacidades de escalabilidad y con la idea de enviar a cada nodo del clúster pequeñas partes del programa, trabajarlas en paralelo, recopilarlas y en el resultado, unirlas. Así que en el 2004, Google publicó un artículo de Jeffrey Dean y Sanjay Ghemawat, llamado “MapReduce: Procesamiento de datos simplificado en grandes grupos”. Jeffry Dean era un programador de Google quien resolvió los problemas de paralización, distribución y tolerancia a fallos mediante un sistema llamado MapReduce pensado para procesar Terabytes incluso Petabytes. Todo este sistema oculta toda la complejidad, exponiendo una API que consistía de 2 funciones "Map" y "Reduce".
+Había una cuestión para Doug y Mike en el procesamiento de datos, porque tenia que ejecutarse en paralelo para ajustare a la naturaleza distribuida de NDFS con 
+similares capacidades de escalabilidad y con la idea de enviar a cada nodo del clúster pequeñas partes del programa, trabajarlas en paralelo, recopilarlas y en el 
+resultado, unirlas. Así que en el 2004, Google publicó un artículo de Jeffrey Dean y Sanjay Ghemawat, llamado “MapReduce: Procesamiento de datos simplificado en 
+grandes grupos”. Jeffry Dean era un programador de Google quien resolvió los problemas de paralización, distribución y tolerancia a fallos mediante un sistema 
+llamado MapReduce pensado para procesar Terabytes incluso Petabytes. Todo este sistema oculta toda la complejidad, exponiendo una API que consistía de 2 funciones 
+"Map" y "Reduce".
 
-En febrero del 2006, Doug lanzó el GDFS y MapReduce de la base código de Nutch e inició un nuevo proyecto al que llamó Hadoop formada por Hadoop Common, HDFS y MapReduce.  Alrededor de este tiempo, redes sociales y muchos otros comenzaron a trabajar seriamente con Hadoop y contribuyeron con herramientas y marcos de respaldo al ecosistema de código abierto de Hadoop. Cloudera fue fundada por un chico de Berkeley, Mike Olson, Christophe Bisciglia de Google, Jeff Hamerbacher de Facebook y Amr Awadallah de Yahoo!. Para marzo de 2009, Amazon ya había comenzado a proporcionar el servicio de alojamiento MapReduce, Elastic MapReduce y en agosto Doug deja Yahoo!, y se va a trabajar para Cloudera, como arquitecto jefe.
-
-En 2012, el clúster de Hadoop de Yahoo! cuenta con 42 000 nodos, su número de contribuyentes de Hadoop alcanza los 1200, pero antes de que Hadoop se generalizara, incluso el almacenamiento de grandes cantidades de datos estructurados era problemático. La carga financiera de los grandes silos de datos hizo que las organizaciones descartaran información no esencial, manteniendo solo los datos más valiosos. Hadoop revolucionó el almacenamiento de datos e hizo posible mantener todos los datos, sin importar lo importante que sea.
+En febrero del 2006, Doug lanzó el GDFS y MapReduce de la base código de Nutch e inició un nuevo proyecto al que llamó Hadoop formada por Hadoop Common, HDFS y 
+MapReduce.  Alrededor de este tiempo, redes sociales y muchos otros comenzaron a trabajar seriamente con Hadoop y contribuyeron con herramientas y marcos de 
+respaldo al ecosistema de código abierto de Hadoop. Cloudera fue fundada por un chico de Berkeley, Mike Olson, Christophe Bisciglia de Google, Jeff Hamerbacher de 
+Facebook y Amr Awadallah de Yahoo!. Para marzo de 2009, Amazon ya había comenzado a proporcionar el servicio de alojamiento MapReduce, Elastic MapReduce y en agosto 
+Doug deja Yahoo!, y se va a trabajar para Cloudera, como arquitecto jefe. En 2012, el clúster de Hadoop de Yahoo! ya contaba con 42 000 nodos, su número de 
+contribuyentes de Hadoop alcanzó los 1200, pero antes de que Hadoop se generalizara, incluso el almacenamiento de grandes cantidades de datos estructurados era 
+problemático. La carga financiera de los grandes silos de datos hizo que las organizaciones descartaran información no esencial, manteniendo solo los datos más 
+valiosos. Hadoop revolucionó el almacenamiento de datos e hizo posible mantener todos los datos, sin importar lo importante que sea.
 
 Por último, como dato interesante, el nombre de Hadoop y su logo hacen referencia de un peluche de elefante del hijo de Doug Cutting.
